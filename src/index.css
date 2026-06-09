@@ -1,91 +1,84 @@
 :root {
-  --bg0: #070814;
-  --bg1: #0b0d1e;
-  --text: rgba(255, 255, 255, 0.82);
-  --textStrong: rgba(255, 255, 255, 0.96);
-  --muted: rgba(255, 255, 255, 0.62);
-  --border: rgba(255, 255, 255, 0.12);
+  /* VS Code Dark+ Theme Palette */
+  --ide-bg: #1e1e1e;
+  --ide-sidebar: #252526;
+  --ide-activity: #333333;
+  --ide-panel: #1e1e1e;
+  --ide-topbar: #323233;
+  --ide-statusbar: #007acc;
+  --ide-tab-active: #1e1e1e;
+  --ide-tab-inactive: #2d2d2d;
+  --ide-border: #454545;
+  --ide-highlight: #04395e; /* Selection color */
 
-  --brand: #a855f7;
-  --brand2: #22d3ee;
-  --good: #34d399;
+  /* Text Colors */
+  --text-main: #d4d4d4;
+  --text-muted: #858585;
+  --text-ui: #cccccc;
+  
+  /* Syntax Highlighting */
+  --syntax-keyword: #569cd6; /* Blue (const, function, class) */
+  --syntax-control: #c586c0; /* Purple (if, return, export) */
+  --syntax-string: #ce9178;  /* Orange/Brown */
+  --syntax-number: #b5cea8;  /* Light Green */
+  --syntax-type: #4ec9b0;    /* Teal (Project, Array) */
+  --syntax-func: #dcdcaa;    /* Yellow (App, map, log) */
+  --syntax-comment: #6a9955; /* Green */
+  --syntax-var: #9cdcfe;     /* Light Blue (props, state) */
+  --syntax-tag: #569cd6;     /* Blue (HTML tags) */
+  --syntax-attr: #9cdcfe;    /* Light Blue (HTML attributes) */
 
-  --shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
-  --shadowSoft: 0 10px 26px rgba(0, 0, 0, 0.35);
-
-  --radius: 18px;
-  --radiusSm: 14px;
-
-  --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, 'Apple Color Emoji',
-    'Segoe UI Emoji';
-  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
-
-  font-family: var(--sans);
-  line-height: 1.45;
-  font-weight: 400;
-
-  color: var(--text);
-  background: radial-gradient(900px 600px at 15% 10%, rgba(168, 85, 247, 0.18), transparent 60%),
-    radial-gradient(900px 600px at 85% 5%, rgba(34, 211, 238, 0.16), transparent 60%),
-    radial-gradient(900px 600px at 50% 90%, rgba(52, 211, 153, 0.08), transparent 55%),
-    linear-gradient(180deg, var(--bg0), var(--bg1));
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Fonts */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* Offset in-page anchors for the sticky header */
-section[id] {
-  scroll-margin-top: 92px;
-}
-
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  background-color: var(--ide-bg);
+  color: var(--text-main);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Prevent body scroll, handle scroll in editor pane */
+}
+
+::selection {
+  background: var(--ide-highlight);
+  color: #fff;
 }
 
 a {
-  color: inherit;
+  color: var(--syntax-var);
   text-decoration: none;
 }
 
 a:hover {
-  text-decoration: none;
+  text-decoration: underline;
 }
 
-::selection {
-  background: rgba(168, 85, 247, 0.25);
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
 }
-
-#root {
-  min-height: 100svh;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-/* Accessibility */
-:focus-visible {
-  outline: 2px solid rgba(34, 211, 238, 0.8);
-  outline-offset: 2px;
+::-webkit-scrollbar-thumb {
+  background: #424242;
+  border: 4px solid var(--ide-bg);
+  background-clip: padding-box;
 }
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #4f4f4f;
+}
+::-webkit-scrollbar-corner {
+  background: var(--ide-bg);
 }

@@ -5,6 +5,8 @@ import mePhoto from './assets/photos/me.png'
 import logoFisioprime from './assets/logos/logo_fisioprime.png'
 import logoUangcek from './assets/logos/logo_uangcek.png'
 import logoKolamguard from './assets/logos/logo_kolamguard.png'
+import logoYoutubeCensorer from './assets/logos/logo_youtube_censorer_extension.png'
+import logoIotSession from './assets/logos/logo_iot_session_with_redis_for_mysql_mongodb.png'
 
 const files = [
   { name: 'profile.ts', icon: 'TS', color: '#3178c6' },
@@ -34,7 +36,7 @@ function App() {
   }
 
   // Generate line numbers based on content approximation (hardcoded max for simplicity)
-  const lines = useMemo(() => Array.from({ length: 45 }, (_, i) => i + 1), [])
+  const lines = useMemo(() => Array.from({ length: 55 }, (_, i) => i + 1), [])
 
   const renderProfileTs = () => (
     <>
@@ -121,6 +123,7 @@ function App() {
         <span className="code-indent"><span className="sy-punct">-</span> Database Engineering</span>
         <span className="code-indent"><span className="sy-punct">-</span> Data modeling</span>
         <span className="code-indent"><span className="sy-punct">-</span> SQL</span>
+        <span className="code-indent"><span className="sy-punct">-</span> Redis / NoSQL</span>
       </div>
 
       <div className="code-block">
@@ -153,8 +156,10 @@ function App() {
         <span className="code-indent"><span className="sy-punct">{'{'}</span></span>
         <span className="code-indent-2"><span className="sy-var">"id"</span><span className="sy-punct">:</span> <span className="sy-str">"vulgar-detection"</span><span className="sy-punct">,</span></span>
         <span className="code-indent-2"><span className="sy-var">"title"</span><span className="sy-punct">:</span> <span className="sy-str">"Deteksi Thumbnail Vulgar"</span><span className="sy-punct">,</span></span>
-        <span className="code-indent-2"><span className="sy-var">"description"</span><span className="sy-punct">:</span> <span className="sy-str">"Sistem deteksi otomatis untuk thumbnail vulgar pada video Youtube. Menggunakan algoritma YoloV11 untuk Computer Vision dan IndoBERT untuk analisis teks."</span><span className="sy-punct">,</span></span>
-        <span className="code-indent-2"><span className="sy-var">"tags"</span><span className="sy-punct">:</span> <span className="sy-punct">[</span><span className="sy-str">"YOLOV11"</span><span className="sy-punct">,</span> <span className="sy-str">"INDOBERT"</span><span className="sy-punct">,</span> <span className="sy-str">"PYTHON"</span><span className="sy-punct">,</span> <span className="sy-str">"MACHINE_LEARNING"</span><span className="sy-punct">]</span></span>
+        <span className="code-indent-2"><span className="sy-var">"description"</span><span className="sy-punct">:</span> <span className="sy-str">"Automated detection system for vulgar thumbnails on YouTube videos. Utilizes the YOLOv11 algorithm for Computer Vision and IndoBERT for text analysis."</span><span className="sy-punct">,</span></span>
+        <span className="code-indent-2"><span className="sy-var">"tags"</span><span className="sy-punct">:</span> <span className="sy-punct">[</span><span className="sy-str">"YOLOV11"</span><span className="sy-punct">,</span> <span className="sy-str">"INDOBERT"</span><span className="sy-punct">,</span> <span className="sy-str">"PYTHON"</span><span className="sy-punct">,</span> <span className="sy-str">"MACHINE_LEARNING"</span><span className="sy-punct">],</span></span>
+        <span className="code-indent-2"><span className="sy-var">"logo"</span><span className="sy-punct">:</span> <span className="sy-str">"/assets/photos/logo_youtube_censorer_extension.png"</span></span>
+        <div className="image-preview" style={{marginLeft: 48}}><img src={logoYoutubeCensorer} alt="Deteksi Thumbnail Vulgar" width={80} style={{background: 'white', padding: 4}}/></div>
         <span className="code-indent"><span className="sy-punct">{'}'},</span></span>
 
         {/* Project 3 */}
@@ -175,6 +180,16 @@ function App() {
         <span className="code-indent-2"><span className="sy-var">"tags"</span><span className="sy-punct">:</span> <span className="sy-punct">[</span><span className="sy-str">"FLUTTER"</span><span className="sy-punct">,</span> <span className="sy-str">"REAL_TIME"</span><span className="sy-punct">,</span> <span className="sy-str">"IOT"</span><span className="sy-punct">,</span> <span className="sy-str">"MONITORING"</span><span className="sy-punct">],</span></span>
         <span className="code-indent-2"><span className="sy-var">"logo"</span><span className="sy-punct">:</span> <span className="sy-str">"/assets/logos/logo_kolamguard.png"</span></span>
         <div className="image-preview" style={{marginLeft: 48}}><img src={logoKolamguard} alt="KolamGuard" width={80} style={{background: 'white', padding: 4}}/></div>
+        <span className="code-indent"><span className="sy-punct">{'}'},</span></span>
+
+        {/* Project 5 */}
+        <span className="code-indent"><span className="sy-punct">{'{'}</span></span>
+        <span className="code-indent-2"><span className="sy-var">"id"</span><span className="sy-punct">:</span> <span className="sy-str">"iot-session-management"</span><span className="sy-punct">,</span></span>
+        <span className="code-indent-2"><span className="sy-var">"title"</span><span className="sy-punct">:</span> <span className="sy-str">"IoT Session Management"</span><span className="sy-punct">,</span></span>
+        <span className="code-indent-2"><span className="sy-var">"description"</span><span className="sy-punct">:</span> <span className="sy-str">"IoT device session management system based on JSON Web Tokens (JWT) using Redis in-memory database, featuring performance analysis on MySQL and MongoDB. (Undergraduate Thesis Project)"</span><span className="sy-punct">,</span></span>
+        <span className="code-indent-2"><span className="sy-var">"tags"</span><span className="sy-punct">:</span> <span className="sy-punct">[</span><span className="sy-str">"IOT"</span><span className="sy-punct">,</span> <span className="sy-str">"JWT"</span><span className="sy-punct">,</span> <span className="sy-str">"REDIS"</span><span className="sy-punct">,</span> <span className="sy-str">"MYSQL"</span><span className="sy-punct">,</span> <span className="sy-str">"MONGODB"</span><span className="sy-punct">],</span></span>
+        <span className="code-indent-2"><span className="sy-var">"logo"</span><span className="sy-punct">:</span> <span className="sy-str">"/assets/logos/logo_iot_session_with_redis_for_mysql_mongodgb.png"</span></span>
+        <div className="image-preview" style={{marginLeft: 48}}><img src={logoIotSession} alt="IoT Session Management" width={80} style={{background: 'white', padding: 4}}/></div>
         <span className="code-indent"><span className="sy-punct">{'}'}</span></span>
 
         <span className="sy-punct">]</span>

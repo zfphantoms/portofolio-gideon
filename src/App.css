@@ -148,7 +148,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   background-color: var(--bg-dark);
-  min-width: 0; /* Important for flex child to allow shrinking */
+  min-width: 0; 
+  min-height: 0; /* PERBAIKAN: Wajib ditambahkan agar flex-column tidak bocor vertikal */
 }
 
 /* Tabs */
@@ -196,30 +197,38 @@ a:hover {
   padding: 5px 15px;
   font-size: 12px;
   color: var(--text-muted);
-  /* border-bottom: 1px solid var(--border); */ /* Optional */
 }
 
 /* Content Pane */
 .ide-editor-content {
   flex: 1;
   display: flex;
-  overflow: auto; /* Allow scrolling for code content */
+  overflow: auto; /* Ini akan meng-handle scroll X dan Y sekaligus */
   padding: 10px 0;
+  min-height: 0; 
 }
 
 .ide-lines {
   width: 50px;
+  min-width: 50px; /* Mencegah kolom mengecil */
   text-align: right;
   padding-right: 15px;
   color: var(--text-muted);
   user-select: none;
   font-size: 13px;
   line-height: 1.6;
+  
+  /* PERBAIKAN: Membuat nomor baris menempel di kiri saat di-scroll horizontal */
+  position: sticky;
+  left: 0;
+  background-color: var(--bg-dark);
+  z-index: 10; 
 }
 
 .ide-code {
   flex: 1;
-  overflow-x: auto; /* Horizontal scroll for long code lines */
+  /* PERBAIKAN: Hapus overflow-x: auto; dan ganti dengan visible */
+  overflow: visible; 
   padding-right: 15px;
   line-height: 1.6;
   font-size: 13px;
@@ -242,12 +251,12 @@ a:hover {
 /* =========================================================
    Syntax Highlighting Colors
 ========================================================= */
-.sy-ctrl { color: #c586c0; }       /* Keywords like import, export */
-.sy-punct { color: #d4d4d4; }      /* Brackets, punctuation */
-.sy-type { color: #4ec9b0; }       /* Types, Classes */
+.sy-ctrl { color: #c586c0; }       /* Keywords */
+.sy-punct { color: #d4d4d4; }      /* Brackets */
+.sy-type { color: #4ec9b0; }       /* Types */
 .sy-str { color: #ce9178; }        /* Strings */
 .sy-comment { color: #6a9955; }    /* Comments */
-.sy-var { color: #9cdcfe; }        /* Variables, Object keys */
+.sy-var { color: #9cdcfe; }        /* Variables */
 .sy-func { color: #dcdcaa; }       /* Functions */
 .sy-keyword { color: #569cd6; }    /* Const, var, let */
 
@@ -255,17 +264,14 @@ a:hover {
    Mobile Responsiveness
 ========================================================= */
 @media screen and (max-width: 768px) {
-  /* Ubah layout main menjadi tumpukan vertikal */
   .ide-main {
     flex-direction: column;
   }
 
-  /* Sembunyikan Activity bar di mobile untuk hemat layar */
   .ide-activitybar {
     display: none;
   }
 
-  /* Ubah Sidebar menjadi horizontal scroll menu di bagian atas */
   .ide-sidebar {
     width: 100%;
     height: auto;
@@ -273,12 +279,10 @@ a:hover {
     border-bottom: 1px solid var(--border);
   }
 
-  /* Sembunyikan tulisan 'EXPLORER' */
   .sidebar-header, .sidebar-section-title {
     display: none; 
   }
 
-  /* Buat daftar file menjadi memanjang ke samping */
   .ide-sidebar > div:last-child {
     display: flex;
     overflow-x: auto;
@@ -288,7 +292,7 @@ a:hover {
   }
 
   .ide-sidebar > div:last-child::-webkit-scrollbar {
-    display: none; /* Sembunyikan scrollbar agar lebih rapi di HP */
+    display: none; 
   }
 
   .file-item {
@@ -302,23 +306,33 @@ a:hover {
     border: 1px solid var(--border);
   }
 
-  /* Sembunyikan tab editor karena fungsinya sudah digantikan file-item horizontal di atasnya */
   .ide-tabs {
     display: none;
   }
 
-  /* Sembunyikan nomor baris pada editor agar ruang untuk teks code lebih lega */
   .ide-lines {
     display: none; 
   }
 
-  /* Berikan padding pada code agar tidak menempel di tepi kiri layar */
   .ide-code {
     padding-left: 15px;
+    padding-bottom: 30px; /* Tambahan padding bawah agar kode paling akhir tidak terlalu mepet layar */
   }
 
-  /* Sederhanakan Status bar */
   .ide-statusbar-section:nth-child(2) {
-    display: none; /* Sembunyikan info file type dan encoding di sisi kanan */
+    display: none; 
   }
+}
+
+/* =========================================================
+   FORCE LOCK OUTER SCROLLBAR (TAMBAHKAN DI SINI)
+========================================================= */
+html, body, #root, .ide-container {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
 }

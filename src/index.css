@@ -37,7 +37,7 @@
   box-sizing: border-box;
 }
 
-html, body {
+html, body, #root {  /* <-- Tambahkan #root di sini */
   margin: 0;
   padding: 0;
   background-color: var(--ide-bg);

@@ -1,276 +1,324 @@
+/* =========================================================
+   Base Variables & Reset
+========================================================= */
+:root {
+  --bg-dark: #1e1e1e;
+  --bg-darker: #252526;
+  --bg-darkest: #333333;
+  --text-main: #d4d4d4;
+  --text-muted: #858585;
+  --accent: #007acc;
+  --border: #3c3c3c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .ide-container {
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
-  background-color: var(--ide-bg);
-  overflow: hidden;
-}
-
-/* TOP BAR */
-.ide-topbar {
-  height: 30px;
-  background-color: var(--ide-topbar);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-ui);
-  font-size: 13px;
-  color: var(--text-ui);
-  -webkit-app-region: drag;
-  border-bottom: 1px solid var(--ide-border);
-}
-
-/* MAIN LAYOUT */
-.ide-main {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-}
-
-/* ACTIVITY BAR */
-.ide-activitybar {
-  width: 48px;
-  background-color: var(--ide-activity);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 10px;
-  border-right: 1px solid var(--ide-border);
-}
-
-.ide-activity-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  cursor: pointer;
-  position: relative;
-}
-
-.ide-activity-icon.active {
-  color: #ffffff;
-}
-
-.ide-activity-icon.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background-color: var(--text-main);
-}
-
-/* SIDEBAR */
-.ide-sidebar {
-  width: 240px;
-  background-color: var(--ide-sidebar);
-  border-right: 1px solid var(--ide-border);
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-ui);
-}
-
-.sidebar-header {
-  height: 35px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-}
-
-.sidebar-section-title {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-ui);
-  cursor: pointer;
-}
-.sidebar-section-title:hover {
-  background-color: rgba(255,255,255,0.05);
-}
-
-.file-item {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px 4px 22px;
-  font-size: 13px;
-  color: var(--text-ui);
-  cursor: pointer;
-  user-select: none;
-}
-.file-item:hover {
-  background-color: rgba(255,255,255,0.05);
-}
-.file-item.active {
-  background-color: rgba(255,255,255,0.1);
-  color: #fff;
-}
-.file-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* EDITOR */
-.ide-editor {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  background-color: var(--ide-bg);
-}
-
-.ide-tabs {
-  display: flex;
-  height: 35px;
-  background-color: var(--ide-sidebar);
-  overflow-x: auto;
-  border-bottom: 1px solid var(--ide-border);
-}
-.ide-tabs::-webkit-scrollbar {
-  height: 0px;
-}
-
-.ide-tab {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  padding: 0 16px;
-  background-color: var(--ide-tab-inactive);
-  color: var(--text-muted);
-  font-family: var(--font-ui);
-  font-size: 13px;
-  cursor: pointer;
-  border-right: 1px solid var(--ide-border);
-  min-width: fit-content;
-}
-
-.ide-tab.active {
-  background-color: var(--ide-tab-active);
+  background-color: var(--bg-dark);
   color: var(--text-main);
-  border-top: 1px solid var(--syntax-keyword);
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 14px;
 }
 
-.ide-breadcrumb {
+/* =========================================================
+   Top Bar & Status Bar
+========================================================= */
+.ide-topbar {
   display: flex;
+  justify-content: center;
   align-items: center;
-  height: 22px;
-  padding: 0 16px;
-  font-family: var(--font-ui);
+  height: 30px;
+  background-color: var(--bg-darkest);
   font-size: 12px;
   color: var(--text-muted);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.ide-editor-content {
-  flex: 1;
-  position: relative;
-  overflow: auto;
-  padding: 16px 0 64px 0;
-}
-
-/* LINE NUMBERS */
-.ide-lines {
-  position: absolute;
-  left: 0;
-  top: 16px;
-  bottom: 0;
-  width: 50px;
-  text-align: right;
-  padding-right: 16px;
-  color: #5a5a5a;
-  user-select: none;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* CODE CONTENT */
-.ide-code {
-  padding-left: 64px;
-  padding-right: 24px;
-  font-size: 14px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-/* SYNTAX CLASSES */
-.sy-kw { color: var(--syntax-keyword); }
-.sy-ctrl { color: var(--syntax-control); }
-.sy-str { color: var(--syntax-string); }
-.sy-num { color: var(--syntax-number); }
-.sy-type { color: var(--syntax-type); }
-.sy-func { color: var(--syntax-func); }
-.sy-comment { color: var(--syntax-comment); }
-.sy-var { color: var(--syntax-var); }
-.sy-tag { color: var(--syntax-tag); }
-.sy-attr { color: var(--syntax-attr); }
-.sy-punct { color: var(--text-main); }
-
-/* STATUS BAR */
 .ide-statusbar {
-  height: 22px;
-  background-color: var(--ide-statusbar);
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  height: 22px;
   padding: 0 10px;
-  font-family: var(--font-ui);
+  background-color: var(--accent);
+  color: white;
   font-size: 12px;
-  color: #ffffff;
 }
 
 .ide-statusbar-section {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 15px;
 }
 
-/* SPECIFIC CODE BLOCKS (to structure content) */
-.code-block {
-  margin-bottom: 24px;
-}
-.code-indent {
-  padding-left: 24px;
-  display: block;
-}
-.code-indent-2 {
-  padding-left: 48px;
-  display: block;
+/* =========================================================
+   Main Layout
+========================================================= */
+.ide-main {
+  display: flex;
+  flex: 1;
+  overflow: hidden; /* Prevent scrolling on the main container */
 }
 
-/* IMAGE DISPLAY IN EDITOR */
-.image-preview {
+/* Activity Bar (Sisi Kiri) */
+.ide-activitybar {
+  width: 50px;
+  background-color: var(--bg-darkest);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.ide-activity-icon {
+  padding: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.ide-activity-icon.active {
+  color: white;
+  border-left: 2px solid var(--accent);
+}
+
+/* Sidebar (Explorer File) */
+.ide-sidebar {
+  width: 250px;
+  background-color: var(--bg-darker);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 10px 20px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.sidebar-section-title {
+  padding: 5px 10px;
+  font-weight: bold;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.file-item {
+  padding: 4px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.file-item:hover {
+  background-color: #2a2d2e;
+}
+
+.file-item.active {
+  background-color: #37373d;
+  color: white;
+}
+
+/* =========================================================
+   Editor Area
+========================================================= */
+.ide-editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-dark);
+  min-width: 0; /* Important for flex child to allow shrinking */
+}
+
+/* Tabs */
+.ide-tabs {
+  display: flex;
+  background-color: var(--bg-darker);
+  overflow-x: auto;
+}
+
+.ide-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.ide-tabs::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+.ide-tab {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 13px;
+}
+
+.ide-tab.active {
+  background-color: var(--bg-dark);
+  border-top: 1px solid var(--accent);
+}
+
+.close-btn {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.close-btn:hover {
+  color: white;
+}
+
+/* Breadcrumb */
+.ide-breadcrumb {
+  padding: 5px 15px;
+  font-size: 12px;
+  color: var(--text-muted);
+  /* border-bottom: 1px solid var(--border); */ /* Optional */
+}
+
+/* Content Pane */
+.ide-editor-content {
+  flex: 1;
+  display: flex;
+  overflow: auto; /* Allow scrolling for code content */
+  padding: 10px 0;
+}
+
+.ide-lines {
+  width: 50px;
+  text-align: right;
+  padding-right: 15px;
+  color: var(--text-muted);
+  user-select: none;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ide-code {
+  flex: 1;
+  overflow-x: auto; /* Horizontal scroll for long code lines */
+  padding-right: 15px;
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+/* Syntax Indentation & Blocks */
+.code-block { margin-bottom: 8px; white-space: pre; }
+.code-indent { margin-left: 20px; display: block; }
+.code-indent-2 { margin-left: 40px; display: block; }
+
+/* Image Preview */
+.image-preview { 
+  margin: 10px 0; 
+  border-radius: 6px; 
+  overflow: hidden; 
   display: inline-block;
-  margin: 10px 0 10px 24px;
-  padding: 12px;
-  background-color: rgba(0,0,0,0.2);
-  border: 1px solid var(--ide-border);
-  border-radius: 4px;
-  max-width: 400px;
-}
-.image-preview img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 4px;
-  display: block;
+  border: 1px solid var(--border);
 }
 
-@media (max-width: 768px) {
-  .ide-sidebar {
+/* =========================================================
+   Syntax Highlighting Colors
+========================================================= */
+.sy-ctrl { color: #c586c0; }       /* Keywords like import, export */
+.sy-punct { color: #d4d4d4; }      /* Brackets, punctuation */
+.sy-type { color: #4ec9b0; }       /* Types, Classes */
+.sy-str { color: #ce9178; }        /* Strings */
+.sy-comment { color: #6a9955; }    /* Comments */
+.sy-var { color: #9cdcfe; }        /* Variables, Object keys */
+.sy-func { color: #dcdcaa; }       /* Functions */
+.sy-keyword { color: #569cd6; }    /* Const, var, let */
+
+/* =========================================================
+   Mobile Responsiveness
+========================================================= */
+@media screen and (max-width: 768px) {
+  /* Ubah layout main menjadi tumpukan vertikal */
+  .ide-main {
+    flex-direction: column;
+  }
+
+  /* Sembunyikan Activity bar di mobile untuk hemat layar */
+  .ide-activitybar {
     display: none;
+  }
+
+  /* Ubah Sidebar menjadi horizontal scroll menu di bagian atas */
+  .ide-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Sembunyikan tulisan 'EXPLORER' */
+  .sidebar-header, .sidebar-section-title {
+    display: none; 
+  }
+
+  /* Buat daftar file menjadi memanjang ke samping */
+  .ide-sidebar > div:last-child {
+    display: flex;
+    overflow-x: auto;
+    padding: 8px 10px;
+    white-space: nowrap;
+    background-color: var(--bg-darker);
+  }
+
+  .ide-sidebar > div:last-child::-webkit-scrollbar {
+    display: none; /* Sembunyikan scrollbar agar lebih rapi di HP */
+  }
+
+  .file-item {
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin-right: 8px;
+    border: 1px solid transparent;
+  }
+
+  .file-item.active {
+    border: 1px solid var(--border);
+  }
+
+  /* Sembunyikan tab editor karena fungsinya sudah digantikan file-item horizontal di atasnya */
+  .ide-tabs {
+    display: none;
+  }
+
+  /* Sembunyikan nomor baris pada editor agar ruang untuk teks code lebih lega */
+  .ide-lines {
+    display: none; 
+  }
+
+  /* Berikan padding pada code agar tidak menempel di tepi kiri layar */
+  .ide-code {
+    padding-left: 15px;
+  }
+
+  /* Sederhanakan Status bar */
+  .ide-statusbar-section:nth-child(2) {
+    display: none; /* Sembunyikan info file type dan encoding di sisi kanan */
   }
 }
